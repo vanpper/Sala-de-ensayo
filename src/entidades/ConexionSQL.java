@@ -23,10 +23,22 @@ public class ConexionSQL {
 			Class.forName(driver);
 			cn = DriverManager.getConnection(host+dbname, user, pass);
 		}
-		catch(Exception ex) {
-			System.out.println(ex);
+		catch(Exception e) {
+			e.printStackTrace();
 		}
 		
 		return cn;
+	}
+	
+	public static boolean closeConnection(Connection cn) {
+		
+		try {
+			cn.close();
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }
