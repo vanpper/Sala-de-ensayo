@@ -4,26 +4,27 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
 import entidades.ConexionSql;
-import entidades.Servicio;
-import idao.IServicioDao;
+import entidades.Sala;
+import idao.ISalaDao;
 
-public class ServicioDao implements IServicioDao{
+public class SalaDao implements ISalaDao{
 
 	@Override
-	public boolean Agregar(Servicio servicio) {
+	public boolean Agregar(Sala sala) {
 		
 		Connection cn = ConexionSql.getOpenConnection();
-		String query = "INSERT INTO serviciosespeciales("
+		String query = "INSERT INTO salas("
+						+ "nombre,"
 						+ "descripcion,"
-						+ "precio) VALUES(?,?)";
+						+ "precio) VALUES(?,?,?)";
 		
 		try {
 			
 			PreparedStatement pst = cn.prepareStatement(query);
-			pst.setString(1, servicio.getDescripcion());
-			pst.setInt(2, servicio.getPrecio());
+			pst.setString(1, sala.getNombre());
+			pst.setString(2, sala.getDescripcion());
+			pst.setInt(3, sala.getPrecio());
 			pst.executeUpdate();
 			
 			ConexionSql.closeConnection(cn);
@@ -37,20 +38,22 @@ public class ServicioDao implements IServicioDao{
 	}
 
 	@Override
-	public boolean Modificar(Servicio servicio) {
+	public boolean Modificar(Sala sala) {
 		
 		Connection cn = ConexionSql.getOpenConnection();
-		String query = "UPDATE serviciosespeciales SET "
+		String query = "UPDATE salas SET "
+						+ "nombre = ?,"
 						+ "descripcion = ?,"
 						+ "precio = ?,"
-						+ "estado = ? WHERE idservicio = " + servicio.getId();
-		
+						+ "estado = ? WHERE idsala = " + sala.getId();
+						
 		try {
 			
 			PreparedStatement pst = cn.prepareStatement(query);
-			pst.setString(1, servicio.getDescripcion());
-			pst.setInt(2, servicio.getPrecio());
-			pst.setBoolean(3, servicio.getEstado());
+			pst.setString(1, sala.getNombre());
+			pst.setString(2, sala.getDescripcion());
+			pst.setInt(3, sala.getPrecio());
+			pst.setBoolean(4, sala.getEstado());
 			pst.executeUpdate();
 			
 			ConexionSql.closeConnection(cn);
@@ -67,8 +70,8 @@ public class ServicioDao implements IServicioDao{
 	public boolean Eliminar(int id) {
 		
 		Connection cn = ConexionSql.getOpenConnection();
-		String query = "UPDATE serviciosespeciales SET estado = 0 WHERE idservicio = " + id;
-		
+		String query = "UPDATE salas SET estado = 0 WHERE idsala = " + id;
+						
 		try {
 			
 			PreparedStatement pst = cn.prepareStatement(query);
@@ -88,8 +91,8 @@ public class ServicioDao implements IServicioDao{
 	public boolean Restaurar(int id) {
 		
 		Connection cn = ConexionSql.getOpenConnection();
-		String query = "UPDATE serviciosespeciales SET estado = 1 WHERE idservicio = " + id;
-		
+		String query = "UPDATE salas SET estado = 1 WHERE idsala = " + id;
+						
 		try {
 			
 			PreparedStatement pst = cn.prepareStatement(query);
@@ -106,10 +109,10 @@ public class ServicioDao implements IServicioDao{
 	}
 
 	@Override
-	public Servicio Obtener(int id) {
+	public Sala Obtener(int id) {
 		
 		Connection cn = ConexionSql.getOpenConnection();
-		String query = "SELECT * FROM serviciosespeciales WHERE idservicio = " + id;
+		String query = "SELECT * FROM salas WHERE idsala = " + id;
 		
 		try {
 			
@@ -117,14 +120,15 @@ public class ServicioDao implements IServicioDao{
 			ResultSet rs = pst.executeQuery(query);
 			rs.next();
 			
-			Servicio servicio = new Servicio();
-			servicio.setId(rs.getInt(1));
-			servicio.setDescripcion(rs.getString(2));
-			servicio.setPrecio(rs.getInt(3));
-			servicio.setEstado(rs.getBoolean(4));
+			Sala sala = new Sala();
+			sala.setId(rs.getInt(1));
+			sala.setNombre(rs.getString(2));
+			sala.setDescripcion(rs.getString(3));
+			sala.setPrecio(rs.getInt(4));
+			sala.setEstado(rs.getBoolean(5));
 			
 			ConexionSql.closeConnection(cn);
-			return servicio;
+			return sala;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -134,11 +138,11 @@ public class ServicioDao implements IServicioDao{
 	}
 
 	@Override
-	public ArrayList<Servicio> ObtenerTodos() {
+	public ArrayList<Sala> ObtenerTodas() {
 		
-		ArrayList<Servicio> lista = new ArrayList<Servicio>();
+		ArrayList<Sala> lista = new ArrayList<Sala>();
 		Connection cn = ConexionSql.getOpenConnection();
-		String query = "SELECT * FROM serviciosespeciales ORDER BY descripcion ASC";
+		String query = "SELECT * FROM salas ORDER BY nombre ASC";
 		
 		try {
 			
@@ -147,12 +151,13 @@ public class ServicioDao implements IServicioDao{
 			
 			while(rs.next()) {
 				
-				Servicio servicio = new Servicio();
-				servicio.setId(rs.getInt(1));
-				servicio.setDescripcion(rs.getString(2));
-				servicio.setPrecio(rs.getInt(3));
-				servicio.setEstado(rs.getBoolean(4));
-				lista.add(servicio);
+				Sala sala = new Sala();
+				sala.setId(rs.getInt(1));
+				sala.setNombre(rs.getString(2));
+				sala.setDescripcion(rs.getString(3));
+				sala.setPrecio(rs.getInt(4));
+				sala.setEstado(rs.getBoolean(5));
+				lista.add(sala);
 			}
 			
 			ConexionSql.closeConnection(cn);
@@ -164,4 +169,5 @@ public class ServicioDao implements IServicioDao{
 			return null;
 		}
 	}
+
 }

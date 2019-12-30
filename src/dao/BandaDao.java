@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import entidades.Banda;
-import entidades.ConexionSQL;
+import entidades.ConexionSql;
 import idao.IBandaDao;
 
 public class BandaDao implements IBandaDao{
@@ -13,7 +13,7 @@ public class BandaDao implements IBandaDao{
 	@Override
 	public boolean Agregar(Banda banda) {
 		
-		Connection conexion = ConexionSQL.getOpenConnection();
+		Connection conexion = ConexionSql.getOpenConnection();
 		String query = "INSERT INTO bandas(nombre, telefono, email) VALUES(?,?,?)";
 		
 		try {
@@ -24,12 +24,12 @@ public class BandaDao implements IBandaDao{
 			pst.setString(3, banda.getEmail());
 			pst.executeUpdate();
 			
-			ConexionSQL.closeConnection(conexion);
+			ConexionSql.closeConnection(conexion);
 			return true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(conexion);
+			ConexionSql.closeConnection(conexion);
 			return false;
 		}
 	}
@@ -37,7 +37,7 @@ public class BandaDao implements IBandaDao{
 	@Override
 	public boolean Modificar(Banda banda) {
 
-		Connection conexion = ConexionSQL.getOpenConnection();
+		Connection conexion = ConexionSql.getOpenConnection();
 		String query = "UPDATE bandas SET nombre = ?, telefono = ?, email = ?, estado = ? WHERE idbanda = " + banda.getId();
 		
 		try {
@@ -49,12 +49,12 @@ public class BandaDao implements IBandaDao{
 			pst.setBoolean(4, banda.getEstado());
 			pst.executeUpdate();
 			
-			ConexionSQL.closeConnection(conexion);
+			ConexionSql.closeConnection(conexion);
 			return true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(conexion);
+			ConexionSql.closeConnection(conexion);
 			return false;
 		}
 	}
@@ -62,7 +62,7 @@ public class BandaDao implements IBandaDao{
 	@Override
 	public boolean Eliminar(int id) {
 		
-		Connection conexion = ConexionSQL.getOpenConnection();
+		Connection conexion = ConexionSql.getOpenConnection();
 		String query = "UPDATE bandas SET estado = 0 WHERE idbanda = " + id;
 		
 		try {
@@ -70,12 +70,12 @@ public class BandaDao implements IBandaDao{
 			PreparedStatement pst = conexion.prepareStatement(query);
 			pst.executeUpdate();
 			
-			ConexionSQL.closeConnection(conexion);
+			ConexionSql.closeConnection(conexion);
 			return true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(conexion);
+			ConexionSql.closeConnection(conexion);
 			return false;
 		}
 	}
@@ -83,7 +83,7 @@ public class BandaDao implements IBandaDao{
 	@Override
 	public Banda Obtener(int id) {
 		
-		Connection conexion = ConexionSQL.getOpenConnection();
+		Connection conexion = ConexionSql.getOpenConnection();
 		String query = "SELECT * FROM bandas WHERE idbanda = " + id;
 		
 		try {
@@ -99,12 +99,12 @@ public class BandaDao implements IBandaDao{
 			banda.setEmail(rs.getString(4));
 			banda.setEstado(rs.getBoolean(5));
 			
-			ConexionSQL.closeConnection(conexion);
+			ConexionSql.closeConnection(conexion);
 			return banda;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(conexion);
+			ConexionSql.closeConnection(conexion);
 			return null;
 		}
 	}
@@ -113,7 +113,7 @@ public class BandaDao implements IBandaDao{
 	public ArrayList<Banda> ObtenerTodas() {
 		
 		ArrayList<Banda> lista = new ArrayList<Banda>();
-		Connection conexion = ConexionSQL.getOpenConnection();
+		Connection conexion = ConexionSql.getOpenConnection();
 		String query = "SELECT * FROM bandas ORDER BY nombre ASC";
 		
 		try {
@@ -131,12 +131,12 @@ public class BandaDao implements IBandaDao{
 				lista.add(banda);
 			}
 			
-			ConexionSQL.closeConnection(conexion);
+			ConexionSql.closeConnection(conexion);
 			return lista;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(conexion);
+			ConexionSql.closeConnection(conexion);
 			return null;
 		}
 	}
@@ -144,7 +144,7 @@ public class BandaDao implements IBandaDao{
 	@Override
 	public boolean Restaurar(int id) {
 		
-		Connection conexion = ConexionSQL.getOpenConnection();
+		Connection conexion = ConexionSql.getOpenConnection();
 		String query = "UPDATE bandas SET estado = 1 WHERE idbanda = " + id;
 		
 		try {
@@ -152,12 +152,12 @@ public class BandaDao implements IBandaDao{
 			PreparedStatement pst = conexion.prepareStatement(query);
 			pst.executeUpdate();
 			
-			ConexionSQL.closeConnection(conexion);
+			ConexionSql.closeConnection(conexion);
 			return true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(conexion);
+			ConexionSql.closeConnection(conexion);
 			return false;
 		}
 	}

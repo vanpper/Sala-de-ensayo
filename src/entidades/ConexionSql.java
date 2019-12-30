@@ -3,7 +3,7 @@ package entidades;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class ConexionSQL {
+public class ConexionSql {
 
 	private static final String driver = "com.mysql.cj.jdbc.Driver";
 	private static final String host = "jdbc:mysql://localhost:3306/";
@@ -11,7 +11,7 @@ public class ConexionSQL {
 	private static final String pass = "root";
 	private static final String dbname = "saladeensayo";
 	
-	public ConexionSQL() {
+	public ConexionSql() {
 		
 	}
 	

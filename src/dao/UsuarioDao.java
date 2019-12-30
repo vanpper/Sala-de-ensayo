@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import entidades.ConexionSQL;
+import entidades.ConexionSql;
 import entidades.Usuario;
 import idao.IUsuarioDao;
 
@@ -13,7 +13,7 @@ public class UsuarioDao implements IUsuarioDao{
 	@Override
 	public boolean Agregar(Usuario usuario) {
 		
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "INSERT INTO usuarios("
 						+ "nombre,"
 						+ "apellido,"
@@ -31,12 +31,12 @@ public class UsuarioDao implements IUsuarioDao{
 			pst.setString(5, usuario.getContraseña());
 			pst.executeUpdate();
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return false;
 		}
 	}
@@ -44,7 +44,7 @@ public class UsuarioDao implements IUsuarioDao{
 	@Override
 	public boolean Modificar(Usuario usuario) {
 		
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "UPDATE usuarios SET nombre = ?,"
 						+ "apellido = ?,"
 						+ "telefono = ?,"
@@ -61,12 +61,12 @@ public class UsuarioDao implements IUsuarioDao{
 			pst.setBoolean(5, usuario.getEstado());
 			pst.executeUpdate();
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return false;
 		}
 	}
@@ -74,7 +74,7 @@ public class UsuarioDao implements IUsuarioDao{
 	@Override
 	public boolean Eliminar(int id) {
 		
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "UPDATE usuarios SET estado = 0 WHERE idusuario = " + id;
 		
 		try {
@@ -82,12 +82,12 @@ public class UsuarioDao implements IUsuarioDao{
 			PreparedStatement pst = cn.prepareStatement(query);
 			pst.executeUpdate();
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return false;
 		}
 	}
@@ -95,7 +95,7 @@ public class UsuarioDao implements IUsuarioDao{
 	@Override
 	public boolean Restaurar(int id) {
 		
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "UPDATE usuarios SET estado = 1 WHERE idusuario = " + id;
 		
 		try {
@@ -103,12 +103,12 @@ public class UsuarioDao implements IUsuarioDao{
 			PreparedStatement pst = cn.prepareStatement(query);
 			pst.executeUpdate();
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return false;
 		}
 	}
@@ -116,7 +116,7 @@ public class UsuarioDao implements IUsuarioDao{
 	@Override
 	public Usuario Obtener(int id) {
 		
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "SELECT * FROM usuarios WHERE idusuario = " + id;
 		
 		try {
@@ -133,12 +133,12 @@ public class UsuarioDao implements IUsuarioDao{
 			usuario.setContraseña(rs.getString(6));
 			usuario.setEstado(rs.getBoolean(7));
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return usuario;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return null;
 		}
 	}
@@ -147,7 +147,7 @@ public class UsuarioDao implements IUsuarioDao{
 	public ArrayList<Usuario> ObtenerTodos() {
 		
 		ArrayList<Usuario> lista = new ArrayList<Usuario>();
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "SELECT * FROM usuarios ORDER BY nombre + apellido ASC";
 		
 		try {
@@ -167,12 +167,12 @@ public class UsuarioDao implements IUsuarioDao{
 				lista.add(usuario);
 			}
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return lista;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return null;
 		}
 	}

@@ -7,6 +7,7 @@ public interface ISalaDao {
 	boolean Agregar(Sala sala);
 	boolean Modificar(Sala sala);
 	boolean Eliminar(int id);
+	boolean Restaurar(int id);
 	Sala Obtener(int id);
 	ArrayList<Sala> ObtenerTodas();
 }

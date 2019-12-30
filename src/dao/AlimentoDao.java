@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import entidades.Alimento;
-import entidades.ConexionSQL;
+import entidades.ConexionSql;
 import idao.IAlimentoDao;
 
 public class AlimentoDao implements IAlimentoDao{
@@ -14,7 +14,7 @@ public class AlimentoDao implements IAlimentoDao{
 	@Override
 	public boolean Agregar(Alimento alimento) {
 		
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "INSERT INTO alimentos("
 						+ "nombre,"
 						+ "descripcion,"
@@ -30,12 +30,12 @@ public class AlimentoDao implements IAlimentoDao{
 			pst.setInt(4, alimento.getPrecio());
 			pst.executeUpdate();
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return false;
 		}
 	}
@@ -43,7 +43,7 @@ public class AlimentoDao implements IAlimentoDao{
 	@Override
 	public boolean Modificar(Alimento alimento) {
 		
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "UPDATE alimentos SET "
 						+ "nombre = ?,"
 						+ "descripcion = ?,"
@@ -61,12 +61,12 @@ public class AlimentoDao implements IAlimentoDao{
 			pst.setBoolean(5, alimento.getEstado());
 			pst.executeUpdate();
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return false;
 		}
 	}
@@ -74,7 +74,7 @@ public class AlimentoDao implements IAlimentoDao{
 	@Override
 	public boolean Eliminar(int id) {
 		
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "UPDATE alimentos SET estado = 0 WHERE idalimento = " + id;
 		
 		try {
@@ -82,12 +82,12 @@ public class AlimentoDao implements IAlimentoDao{
 			PreparedStatement pst = cn.prepareStatement(query);
 			pst.executeUpdate();
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return false;
 		}
 	}
@@ -95,7 +95,7 @@ public class AlimentoDao implements IAlimentoDao{
 	@Override
 	public boolean Restaurar(int id) {
 		
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "UPDATE alimentos SET estado = 1 WHERE idalimento = " + id;
 		
 		try {
@@ -103,12 +103,12 @@ public class AlimentoDao implements IAlimentoDao{
 			PreparedStatement pst = cn.prepareStatement(query);
 			pst.executeUpdate();
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return false;
 		}
 	}
@@ -116,7 +116,7 @@ public class AlimentoDao implements IAlimentoDao{
 	@Override
 	public Alimento Obtener(int id) {
 		
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "SELECT * FROM alimentos WHERE idalimento = " + id;
 		
 		try {
@@ -133,12 +133,12 @@ public class AlimentoDao implements IAlimentoDao{
 			alimento.setPrecio(rs.getInt(5));
 			alimento.setEstado(rs.getBoolean(6));
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return alimento;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return null;
 		}
 	}
@@ -147,7 +147,7 @@ public class AlimentoDao implements IAlimentoDao{
 	public ArrayList<Alimento> ObtenerTodos() {
 		
 		ArrayList<Alimento> lista = new ArrayList<Alimento>();
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "SELECT * FROM alimentos ORDER BY nombre ASC";
 		
 		try {
@@ -167,12 +167,12 @@ public class AlimentoDao implements IAlimentoDao{
 				lista.add(alimento);
 			}
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return lista;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return null;
 		}
 	}

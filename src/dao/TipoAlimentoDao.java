@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import entidades.ConexionSQL;
+import entidades.ConexionSql;
 import entidades.TipoAlimento;
 import idao.ITipoAlimentoDao;
 
@@ -13,7 +13,7 @@ public class TipoAlimentoDao implements ITipoAlimentoDao {
 	@Override
 	public TipoAlimento Obtener(int id) {
 		
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "SELECT * FROM tiposalimento WHERE idtipoalimento = " + id;
 		
 		try {
@@ -26,12 +26,12 @@ public class TipoAlimentoDao implements ITipoAlimentoDao {
 			tipo.setId(rs.getInt(1));
 			tipo.setDescripcion(rs.getString(2));
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return tipo;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return null;
 		}
 	}
@@ -40,7 +40,7 @@ public class TipoAlimentoDao implements ITipoAlimentoDao {
 	public ArrayList<TipoAlimento> ObtenerTodos() {
 		
 		ArrayList<TipoAlimento> lista = new ArrayList<TipoAlimento>();
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "SELECT * FROM tiposalimento";
 		
 		try {
@@ -56,12 +56,12 @@ public class TipoAlimentoDao implements ITipoAlimentoDao {
 				lista.add(tipo);
 			}
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return lista;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return null;
 		}
 	}

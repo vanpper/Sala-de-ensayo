@@ -3,7 +3,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import entidades.ConexionSQL;
+import entidades.ConexionSql;
 import entidades.Equipo;
 import idao.IEquipoDao;
 
@@ -12,7 +12,7 @@ public class EquipoDao implements IEquipoDao{
 	@Override
 	public boolean Agregar(Equipo equipo) {
 		
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "INSERT INTO equipos("
 						+ "nombre,"
 						+ "descripcion,"
@@ -28,12 +28,12 @@ public class EquipoDao implements IEquipoDao{
 			pst.setInt(4, equipo.getPrecio());
 			pst.executeUpdate();
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return false;
 		}
 	}
@@ -41,7 +41,7 @@ public class EquipoDao implements IEquipoDao{
 	@Override
 	public boolean Modificar(Equipo equipo) {
 		
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "UPDATE equipos SET "
 						+ "nombre = ?,"
 						+ "descripcion = ?,"
@@ -59,12 +59,12 @@ public class EquipoDao implements IEquipoDao{
 			pst.setBoolean(5, equipo.getEstado());
 			pst.executeUpdate();
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return false;
 		}
 	}
@@ -72,7 +72,7 @@ public class EquipoDao implements IEquipoDao{
 	@Override
 	public boolean Eliminar(int id) {
 		
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "UPDATE equipos SET estado = 0 WHERE idequipo = " + id;
 		
 		try {
@@ -80,12 +80,12 @@ public class EquipoDao implements IEquipoDao{
 			PreparedStatement pst = cn.prepareStatement(query);
 			pst.executeUpdate();
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return false;
 		}
 	}
@@ -93,7 +93,7 @@ public class EquipoDao implements IEquipoDao{
 	@Override
 	public boolean Restaurar(int id) {
 		
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "UPDATE equipos SET estado = 1 WHERE idequipo = " + id;
 		
 		try {
@@ -101,12 +101,12 @@ public class EquipoDao implements IEquipoDao{
 			PreparedStatement pst = cn.prepareStatement(query);
 			pst.executeUpdate();
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return false;
 		}
 	}
@@ -114,7 +114,7 @@ public class EquipoDao implements IEquipoDao{
 	@Override
 	public Equipo Obtener(int id) {
 		
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "SELECT * FROM equipos WHERE idequipo = " + id;
 		
 		try {
@@ -131,12 +131,12 @@ public class EquipoDao implements IEquipoDao{
 			equipo.setPrecio(rs.getInt(5));
 			equipo.setEstado(rs.getBoolean(6));
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return equipo;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return null;
 		}
 	}
@@ -145,7 +145,7 @@ public class EquipoDao implements IEquipoDao{
 	public ArrayList<Equipo> ObtenerTodos() {
 		
 		ArrayList<Equipo> lista = new ArrayList<Equipo>();
-		Connection cn = ConexionSQL.getOpenConnection();
+		Connection cn = ConexionSql.getOpenConnection();
 		String query = "SELECT * FROM equipos ORDER BY nombre ASC";
 		
 		try {
@@ -165,12 +165,12 @@ public class EquipoDao implements IEquipoDao{
 				lista.add(equipo);
 			}
 			
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return lista;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			ConexionSQL.closeConnection(cn);
+			ConexionSql.closeConnection(cn);
 			return null;
 		}
 	}
