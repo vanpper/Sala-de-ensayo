@@ -2,10 +2,10 @@ package principal;
 
 import java.sql.Connection;
 
-import Dao.BandaDao;
-import IDao.IBandaDao;
+import dao.BandaDao;
 import entidades.Banda;
 import entidades.ConexionSQL;
+import idao.IBandaDao;
 
 public class Main {
 

@@ -1,4 +1,4 @@
-package IDao;
+package idao;
 import java.util.ArrayList;
 import entidades.Servicio;
 

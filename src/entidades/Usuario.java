@@ -62,7 +62,7 @@ public class Usuario {
 		this.contraseña = contraseña;
 	}
 
-	public boolean isEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
 

@@ -1,11 +1,12 @@
-package Dao;
+package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import IDao.IBandaDao;
+
 import entidades.Banda;
 import entidades.ConexionSQL;
+import idao.IBandaDao;
 
 public class BandaDao implements IBandaDao{
 
