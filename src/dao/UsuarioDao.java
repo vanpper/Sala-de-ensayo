@@ -16,9 +16,9 @@ public class UsuarioDao implements IUsuarioDao{
 		Connection cn = ConexionSQL.getOpenConnection();
 		String query = "INSERT INTO usuarios("
 						+ "nombre,"
-						+ "apellido"
-						+ "telefono"
-						+ "email"
+						+ "apellido,"
+						+ "telefono,"
+						+ "email,"
 						+ "contraseña) VALUES(?,?,?,?,?)";
 		
 		try {
