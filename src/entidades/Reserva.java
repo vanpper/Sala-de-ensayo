@@ -11,9 +11,6 @@ public class Reserva {
 	private int horaDesde;
 	private int horaHasta;
 	private int precio;
-	private ArrayList<Alimento> alimentos;
-	private ArrayList<Equipo> equipos;
-	private ArrayList<Servicio> servicios;
 	private boolean estado;
 	
 	public Reserva() {
@@ -83,35 +80,12 @@ public class Reserva {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
-	
-	public ArrayList<Alimento> getAlimentos() {
-		return alimentos;
-	}
-
-	public void setAlimentos(ArrayList<Alimento> alimentos) {
-		this.alimentos = alimentos;
-	}
-
-	public ArrayList<Equipo> getEquipos() {
-		return equipos;
-	}
-
-	public void setEquipos(ArrayList<Equipo> equipos) {
-		this.equipos = equipos;
-	}
-
-	public ArrayList<Servicio> getServicios() {
-		return servicios;
-	}
-
-	public void setServicios(ArrayList<Servicio> servicios) {
-		this.servicios = servicios;
-	}
 
 	@Override
 	public String toString() {
 		return "Reserva [id=" + id + ", banda=" + banda + ", sala=" + sala + ", fecha=" + fecha + ", horaDesde="
-				+ horaDesde + ", horaHasta=" + horaHasta + ", precio=" + precio + ", alimentos=" + alimentos
-				+ ", equipos=" + equipos + ", servicios=" + servicios + ", estado=" + estado + "]";
+				+ horaDesde + ", horaHasta=" + horaHasta + ", precio=" + precio + ", estado=" + estado + "]";
 	}
+	
+	
 }

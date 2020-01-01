@@ -1,9 +1,5 @@
 package entidades;
 
-import java.sql.Date;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 public class Fecha {
 
 	private int dia;
@@ -14,12 +10,16 @@ public class Fecha {
 		
 	}
 	
-	public Fecha(Date date) {
-		Calendar calendar = new GregorianCalendar();
-		calendar.setTime(date);
-		this.dia = calendar.get(Calendar.DAY_OF_MONTH);
-		this.mes = calendar.get(Calendar.MONTH) + 1;
-		this.mes = calendar.get(Calendar.YEAR);
+	public Fecha(int dia, int mes, int año) {
+		this.dia = dia;
+		this.mes = mes;
+		this.año = año;
+	}
+	
+	public Fecha(String fecha) {
+		this.dia = Integer.parseInt(fecha.split("-")[2]);
+		this.mes = Integer.parseInt(fecha.split("-")[1]);
+		this.año = Integer.parseInt(fecha.split("-")[0]);
 	}
 
 	public int getDia() {

@@ -15,7 +15,7 @@ public class ServicioDao implements IServicioDao{
 	public boolean Agregar(Servicio servicio) {
 		
 		Connection cn = ConexionSql.getOpenConnection();
-		String query = "INSERT INTO serviciosespeciales("
+		String query = "INSERT INTO servicios("
 						+ "descripcion,"
 						+ "precio) VALUES(?,?)";
 		
@@ -40,7 +40,7 @@ public class ServicioDao implements IServicioDao{
 	public boolean Modificar(Servicio servicio) {
 		
 		Connection cn = ConexionSql.getOpenConnection();
-		String query = "UPDATE serviciosespeciales SET "
+		String query = "UPDATE servicios SET "
 						+ "descripcion = ?,"
 						+ "precio = ?,"
 						+ "estado = ? WHERE idservicio = " + servicio.getId();
@@ -67,7 +67,7 @@ public class ServicioDao implements IServicioDao{
 	public boolean Eliminar(int id) {
 		
 		Connection cn = ConexionSql.getOpenConnection();
-		String query = "UPDATE serviciosespeciales SET estado = 0 WHERE idservicio = " + id;
+		String query = "UPDATE servicios SET estado = 0 WHERE idservicio = " + id;
 		
 		try {
 			
@@ -88,7 +88,7 @@ public class ServicioDao implements IServicioDao{
 	public boolean Restaurar(int id) {
 		
 		Connection cn = ConexionSql.getOpenConnection();
-		String query = "UPDATE serviciosespeciales SET estado = 1 WHERE idservicio = " + id;
+		String query = "UPDATE servicios SET estado = 1 WHERE idservicio = " + id;
 		
 		try {
 			
@@ -109,7 +109,7 @@ public class ServicioDao implements IServicioDao{
 	public Servicio Obtener(int id) {
 		
 		Connection cn = ConexionSql.getOpenConnection();
-		String query = "SELECT * FROM serviciosespeciales WHERE idservicio = " + id;
+		String query = "SELECT * FROM servicios WHERE idservicio = " + id;
 		
 		try {
 			
@@ -138,7 +138,7 @@ public class ServicioDao implements IServicioDao{
 		
 		ArrayList<Servicio> lista = new ArrayList<Servicio>();
 		Connection cn = ConexionSql.getOpenConnection();
-		String query = "SELECT * FROM serviciosespeciales ORDER BY descripcion ASC";
+		String query = "SELECT * FROM servicios ORDER BY descripcion ASC";
 		
 		try {
 			

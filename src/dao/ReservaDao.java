@@ -138,7 +138,7 @@ public class ReservaDao implements IReservaDao{
 			reserva.setId(rs.getInt(1));
 			reserva.setBanda(new BandaDao().Obtener(rs.getInt(2)));
 			reserva.setSala(new SalaDao().Obtener(rs.getInt(3)));
-			reserva.setFecha(new Fecha(rs.getDate(4)));
+			reserva.setFecha(new Fecha(rs.getString(4)));
 			reserva.setHoraDesde(rs.getInt(5));
 			reserva.setHoraHasta(rs.getInt(6));
 			reserva.setPrecio(rs.getInt(7));
@@ -172,7 +172,7 @@ public class ReservaDao implements IReservaDao{
 				reserva.setId(rs.getInt(1));
 				reserva.setBanda(new BandaDao().Obtener(rs.getInt(2)));
 				reserva.setSala(new SalaDao().Obtener(rs.getInt(3)));
-				reserva.setFecha(new Fecha(rs.getDate(4)));
+				reserva.setFecha(new Fecha(rs.getString(4)));
 				reserva.setHoraDesde(rs.getInt(5));
 				reserva.setHoraHasta(rs.getInt(6));
 				reserva.setPrecio(rs.getInt(7));
