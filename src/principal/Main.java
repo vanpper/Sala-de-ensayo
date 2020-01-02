@@ -2,28 +2,36 @@ package principal;
 
 import java.sql.Connection;
 
+import dao.AlimentoDao;
+import dao.AlquilerDao;
+import dao.DetalleAlquilerDao;
+import dao.DetalleVentaDao;
+import dao.EquipoDao;
+import dao.ReservaDao;
 import dao.VentaDao;
+import entidades.Alquiler;
+import entidades.DetalleAlquiler;
+import entidades.DetalleVenta;
 import entidades.Reserva;
 import entidades.Venta;
+import idao.IAlquilerDao;
+import idao.IDetalleAlquilerDao;
 import idao.IVentaDao;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		IVentaDao dao = new VentaDao();
+		IDetalleAlquilerDao dao = new DetalleAlquilerDao();
 		
-		Reserva reserva = new Reserva();
-		reserva.setId(1);
+		DetalleAlquiler detalle = new DetalleAlquiler();
+		detalle.setEquipo(new EquipoDao().Obtener(1));
+		detalle.setCantidad(3);
+		detalle.setPrecio(75);
+		detalle.setSubtotal(225);
 		
-		Venta venta = new Venta();
-		venta.setId(1);
-		venta.setReserva(reserva);
-		venta.setTotal(1500);
+		dao.Eliminar(1, 1);
 		
-		for(Venta v : dao.ObtenerTodas(1)) {
-			System.out.println(v.toString());
-		}
 	}
 
 }

@@ -8,6 +8,7 @@ public class Venta {
 	private Reserva reserva;
 	private ArrayList<DetalleVenta> detalle;
 	private int total;
+	private boolean estado;
 	
 	public Venta() {
 		
@@ -44,9 +45,19 @@ public class Venta {
 	public void setTotal(int total) {
 		this.total = total;
 	}
+	
+	public boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
 
 	@Override
 	public String toString() {
-		return "Venta [id=" + id + ", reserva=" + reserva + ", detalle=" + detalle + ", total=" + total + "]";
+		return "Venta [id=" + id + ", reserva=" + reserva + ", detalle=" + detalle + ", total=" + total + ", estado="
+				+ estado + "]";
 	}
+
 }

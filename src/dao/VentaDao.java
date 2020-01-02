@@ -38,12 +38,13 @@ public class VentaDao implements IVentaDao{
 	public boolean Modificar(Venta venta) {
 		
 		Connection cn = ConexionSql.getOpenConnection();
-		String query = "UPDATE ventas SET total = ? WHERE idventa = " + venta.getId();
+		String query = "UPDATE ventas SET total = ?, estado = ? WHERE idventa = " + venta.getId();
 		
 		try {
 			
 			PreparedStatement pst = cn.prepareStatement(query);
 			pst.setInt(1, venta.getTotal());
+			pst.setBoolean(2, venta.getEstado());
 			pst.executeUpdate();
 			
 			ConexionSql.closeConnection(cn);
@@ -72,6 +73,7 @@ public class VentaDao implements IVentaDao{
 			venta.setId(rs.getInt(1));
 			venta.setReserva(new ReservaDao().Obtener(rs.getInt(2)));
 			venta.setTotal(rs.getInt(3));
+			venta.setEstado(rs.getBoolean(4));
 			
 			ConexionSql.closeConnection(cn);
 			return venta;
@@ -101,6 +103,7 @@ public class VentaDao implements IVentaDao{
 				venta.setId(rs.getInt(1));
 				venta.setReserva(new ReservaDao().Obtener(rs.getInt(2)));
 				venta.setTotal(rs.getInt(3));
+				venta.setEstado(rs.getBoolean(4));
 				lista.add(venta);
 			}
 			
@@ -111,6 +114,48 @@ public class VentaDao implements IVentaDao{
 			e.printStackTrace();
 			ConexionSql.closeConnection(cn);
 			return null;
+		}
+	}
+
+	@Override
+	public boolean Eliminar(int idventa) {
+		
+		Connection cn = ConexionSql.getOpenConnection();
+		String query = "UPDATE ventas SET estado = 0 WHERE idventa = " + idventa;
+		
+		try {
+			
+			PreparedStatement pst = cn.prepareStatement(query);
+			pst.executeUpdate();
+			
+			ConexionSql.closeConnection(cn);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			ConexionSql.closeConnection(cn);
+			return false;
+		}
+	}
+
+	@Override
+	public boolean Restaurar(int idventa) {
+		
+		Connection cn = ConexionSql.getOpenConnection();
+		String query = "UPDATE ventas SET estado = 1 WHERE idventa = " + idventa;
+		
+		try {
+			
+			PreparedStatement pst = cn.prepareStatement(query);
+			pst.executeUpdate();
+			
+			ConexionSql.closeConnection(cn);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			ConexionSql.closeConnection(cn);
+			return false;
 		}
 	}
 
