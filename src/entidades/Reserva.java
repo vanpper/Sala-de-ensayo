@@ -1,7 +1,5 @@
 package entidades;
 
-import java.util.ArrayList;
-
 public class Reserva {
 
 	private int id;
