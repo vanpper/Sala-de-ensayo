@@ -11,7 +11,7 @@ public class Alquiler {
 	private boolean estado;
 	
 	public Alquiler() {
-		
+		detalle = new ArrayList<DetalleAlquiler>();
 	}
 
 	public int getId() {

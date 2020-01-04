@@ -160,4 +160,32 @@ public class AlquilerDao implements IAlquilerDao{
 		}
 	}
 
+	@Override
+	public Alquiler ObtenerUltimo(int idreserva) {
+		
+		Connection cn = ConexionSql.getOpenConnection();
+		String query = "SELECT * FROM alquileres WHERE idreserva = " + idreserva + " ORDER BY idalquiler DESC LIMIT 1";
+		
+		try {
+			
+			PreparedStatement pst = cn.prepareStatement(query);
+			ResultSet rs = pst.executeQuery(query);
+			rs.next();
+			
+			Alquiler alquiler = new Alquiler();
+			alquiler.setId(rs.getInt(1));
+			alquiler.setReserva(new ReservaDao().Obtener(rs.getInt(2)));
+			alquiler.setTotal(rs.getInt(3));
+			alquiler.setEstado(rs.getBoolean(4));
+			
+			ConexionSql.closeConnection(cn);
+			return alquiler;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			ConexionSql.closeConnection(cn);
+			return null;
+		}
+	}
+
 }

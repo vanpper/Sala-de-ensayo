@@ -1,16 +1,15 @@
-package idao;
+package inegocio;
 
 import java.util.ArrayList;
 
 import entidades.Alquiler;
 
-public interface IAlquilerDao {
+public interface IAlquilerNeg {
 
 	boolean Agregar(Alquiler alquiler);
 	boolean Modificar(Alquiler alquiler);
 	boolean Eliminar(int idalquiler);
 	boolean Restaurar(int idalquiler);
 	Alquiler Obtener(int idalquiler);
-	Alquiler ObtenerUltimo(int idreserva);
 	ArrayList<Alquiler> ObtenerTodos(int idreserva);
 }
